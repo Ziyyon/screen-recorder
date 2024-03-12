@@ -22,6 +22,17 @@ def start_rec():
     file = Filename.get()
     file = get_next_filename(file)
     rec.start_recording(str(file), 5)
+    root.attributes("-alpha", 0.1)  # Makes the entire app almost transparent when recording starts
+
+def on_enter(event):
+    root.attributes("-alpha", 1.0)  # Sets the opacity back to normal when mouse hovers over the window
+
+def on_leave(event):
+    root.attributes("-alpha", 0.1)  # Makes the entire app almost transparent again when the mouse leaves
+
+# Bind mouse hover events to the root window
+root.bind("<Enter>", on_enter)
+root.bind("<Leave>", on_leave)
 
 def pause_rec():
     rec.pause_recording()
